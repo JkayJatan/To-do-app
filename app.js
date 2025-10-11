@@ -1,38 +1,69 @@
-let tasks = [];
-const renderTasks = () => {
-    const taskList = document.getElementById("taskList");
-    taskList.innerHTML = "";
-    tasks.forEach((task, index) => {
-        const li = document.createElement("li");
-        listitem.innerHTML = `
-                <div class="listitem">
-                    <div class="task">
-                        <input type="checkbox" class="checkbox">
-                        <p>finish this project</p>
-                    </div>
-                    <div class="icons">
-                        <img src="edit.png" alt="edit.png">
-                        <img src="delete.png" alt="delete.png">
-                    </div>
-                </div>`;
-                
-        taskList.appendChild(li);
-    });
+const taskInput = document.getElementById("taskinput");
+const addTaskBtn = document.getElementById("addtaskbtn");
+const taskList = document.getElementById("taskList");
+const countDivs = document.querySelectorAll(".count div");
 
-};
-const addtask = () => {
-    const taskinput = document.getElementById("taskinput");
-    const text = taskinput.value.trim();
-    if (text) {
-        tasks.push({ text: text, completed: false });
-        taskinput.value = "";
-        console.log(tasks);
-        renderTasks();
+let pendingCount = 0;
+let completedCount = 0;
+
+addTaskBtn.addEventListener("click", function (e) {
+    e.preventDefault(); 
+
+    const taskText = taskInput.value.trim();
+
+    if (taskText === "") {
+        alert("Please enter a task!");
+        return;
     }
-}
+    const li = document.createElement("li");
+    li.className = "task-item";
 
-let inputtask = document.getElementById("taskinput");
-document.getElementById("addtaskbtn").addEventListener('click', function (e) {
-    e.preventDefault();
-    addtask();
+    li.innerHTML = `
+        <span>${taskText}</span>
+        <div class="actions">
+            <button class="complete-btn">✔</button>
+            <button class="delete-btn">❌</button>
+        </div>
+    `;
+
+    // Add to list
+    taskList.appendChild(li);
+    taskInput.value = ""; // clear input
+    pendingCount++;
+    updateCounts();
 });
+
+taskList.addEventListener("click", function (e) {
+    if (e.target.classList.contains("complete-btn")) {
+        const taskItem = e.target.closest("li");
+        taskItem.classList.toggle("completed");
+
+        if (taskItem.classList.contains("completed")) {
+            pendingCount--;
+            completedCount++;
+        } else {
+            pendingCount++;
+            completedCount--;
+        }
+
+        updateCounts();
+    }
+
+    if (e.target.classList.contains("delete-btn")) {
+        const taskItem = e.target.closest("li");
+
+        if (taskItem.classList.contains("completed")) {
+            completedCount--;
+        } else {
+            pendingCount--;
+        }
+
+        taskItem.remove();
+        updateCounts();
+    }
+});
+
+function updateCounts() {
+    countDivs[0].innerText = `Task Pending(${pendingCount})`;
+    countDivs[1].innerText = `Task Completed(${completedCount || "N.A"})`;
+}
