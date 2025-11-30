@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do App</title>
+    <title>TO-DO-APP</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <div class="container">
-
-        <h1><img src="logo.png" alt="logo">To-Do App </h1>
-        <div class="count">
-            <div>Task Pending(0)</div>
-            <div>Task Completed(N.A)</div>
+        <div class="app">
+            <div class="main">
+                <h1>To Do App <img src="assets/logo.png" alt="logo"></h1>
+            </div>
+            <div class="row">
+                <input type="text" id="input-box" placeholder="Add your text">
+                <button onclick="addTask()">ADD</button>
+            </div>
+            <ul id="list-container">
+                <!-- <li class="checked">Task 1</li>
+                <li>Task 2</li>
+                <li>Task 3</li> -->
+            </ul>
         </div>
-        <h3>Task List</h3>
-        <ul id="taskList">
-        </ul>
-        <form action=""><input type="text" placeholder="Add a new task..." id="taskinput">
-            <button id="addtaskbtn">Add Task</button>
-        </form>
-
-
     </div>
     <script src="app.js"></script>
 </body>
-
 </html>
