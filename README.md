@@ -1,4 +1,5 @@
 # 📝 To-Do App
+# link-https://to-do-app-ecru-two.vercel.app/
 
 A simple and interactive **To-Do List Application** built using **HTML, CSS, and JavaScript**.  
 This app helps you stay organized by allowing you to add, edit, delete, and mark tasks as completed — all in a clean and responsive interface.
@@ -18,4 +19,4 @@ This app helps you stay organized by allowing you to add, edit, delete, and mark
 
 - **HTML5** — For structuring the app.  
 - **CSS3** — For styling and layout.  
-- **JavaScript (Vanilla JS)** — For app functionality and DOM manipulation.
+- **JavaScript** — For app functionality and DOM manipulation.
